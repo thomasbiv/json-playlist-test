@@ -73,7 +73,7 @@ def json_create(username, playlistname, firstsongartist):
             data_begin = {"Playlists" : {playlistname: [firstsongartist]}}
             with open(userfile, "w") as write_file:
                 json.dump(data_begin, write_file)
-                print("Playlist file created for " + str(username) + " containing one playlist named " + playlistname + "! ")
+                print("Playlist file created for " + str(username) + " containing one playlist named " + str(playlistname) + "! ")
         else:
             print("This file already exists. Add this song to an existing playlist file.")
 
@@ -83,12 +83,25 @@ def json_add_to_playlist(username, playlistname, songnameartist):
     if path.exists(userfile):
         with open(userfile,"r+") as read_file: 	
             data = json.load(read_file)
-            data["Playlists"][playlistname].append(songnameartist)
-            read_file.seek(0)
-            json.dump(data, read_file, indent=1)
-            print("Song added to " + username + "'s playlist: " + playlistname + "!")
+            try:
+                data["Playlists"][playlistname].append(songnameartist)
+                read_file.seek(0)
+                json.dump(data, read_file, indent=1)
+                print("Song added to " + username + "'s playlist: " + playlistname + "!")
+            except:
+                print("The requested playlist does not exist. Would you like to create a new playlist with the name " + str(playlistname) + "? (Enter y or n)")
+                decision = input()
+                while decision != 'y' and decision != 'n':
+                    print("Invalid entry")
+                    print("Would you like to create a new playlist with the name " + str(playlistname) + "? (Enter y or n)")
+                    decision = input()
+                if decision == 'y':
+                    json_add_new_playlist(username, playlistname, songnameartist)
+                else:
+                    print("Command aborted. Please try again.")
     else:
-        print("User has no playlist file generated. First create a playlist file.")
+        print("This playlist file does not exist. Creating a new file.")
+        json_create(username, playlistname, songnameartist)
 
 
 def json_add_new_playlist(username, playlistname, songnameartist):
@@ -102,9 +115,10 @@ def json_add_new_playlist(username, playlistname, songnameartist):
                 data["Playlists"].update({playlistname: [songnameartist]})
                 read_file.seek(0)
                 json.dump(data, read_file)
-                print("Playlist named " + playlistname + " created for " + username + "!")
+                print("Playlist named " + str(playlistname) + " created for " + str(username) + "!")
     else:
-        print("This playlist file does not exist. Create a new file first.")
+        print("This playlist file does not exist. Creating a new file.")
+        json_create(username, playlistname, songnameartist)
 
 
 def json_view_playlist(username, playlistname):

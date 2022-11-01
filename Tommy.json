@@ -2,10 +2,14 @@
  "Playlists": {
   "Rock": [
    "Limelight Rush",
-   "Black Dog Led Zeppelin"
+   "Black Dog Led Zeppelin",
+   "AC/DC Thunderstruck"
   ],
   "Rap": [
    "Plain Jane A$AP Ferg"
+  ],
+  "Metal": [
+   "Deftones My Own Summer (Shove It)"
   ]
  }
 }
