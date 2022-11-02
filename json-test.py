@@ -68,7 +68,7 @@ def main():
 
 
 def json_create(username, playlistname, firstsongartist):
-        userfile = username + ".json"
+        userfile = "./playlists/"  + username + ".json"
         if not path.exists(userfile):
             data_begin = {"Playlists" : {playlistname: [firstsongartist]}}
             with open(userfile, "w") as write_file:
@@ -79,7 +79,7 @@ def json_create(username, playlistname, firstsongartist):
 
 
 def json_add_to_playlist(username, playlistname, songnameartist):
-    userfile = username + ".json"
+    userfile = "./playlists/"  + username + ".json"
     if path.exists(userfile):
         with open(userfile,"r+") as read_file: 	
             data = json.load(read_file)
@@ -105,7 +105,7 @@ def json_add_to_playlist(username, playlistname, songnameartist):
 
 
 def json_add_new_playlist(username, playlistname, songnameartist):
-    userfile = username + ".json"
+    userfile = "./playlists/"  + username + ".json"
     if path.exists(userfile):
         with open(userfile, "r+") as read_file:
             data = json.load(read_file)
@@ -122,7 +122,7 @@ def json_add_new_playlist(username, playlistname, songnameartist):
 
 
 def json_view_playlist(username, playlistname):
-    userfile = username + ".json"
+    userfile = "./playlists/"  + username + ".json"
     if path.exists(userfile):
         with open(userfile, "r") as read_file:
             data = json.load(read_file)
@@ -138,7 +138,7 @@ def json_view_playlist(username, playlistname):
 
 
 def json_view_all_playlists(username):
-    userfile = username + ".json"
+    userfile = "./playlists/"  + username + ".json"
     if path.exists(userfile):
         with open(userfile, "r") as read_file:
             data = json.load(read_file)
@@ -151,7 +151,7 @@ def json_view_all_playlists(username):
 
 
 def json_del_song_from_playlist(username, playlistname):
-    userfile = username + ".json"
+    userfile = "./playlists/"  + username + ".json"
     if path.exists(userfile):
         with open(userfile, "r+") as read_file:
             data = json.load(read_file)
@@ -179,7 +179,7 @@ def json_del_song_from_playlist(username, playlistname):
 
 
 def json_del_playlist(username, playlistname):
-    userfile = username + ".json"
+    userfile = "./playlists/"  + username + ".json"
     if path.exists(userfile):
         with open(userfile, "r+") as read_file:
             data = json.load(read_file)
@@ -196,7 +196,7 @@ def json_del_playlist(username, playlistname):
 
 
 def json_clear_playlists(username):
-    userfile = username + ".json"
+    userfile = "./playlists/"  + username + ".json"
     if path.exists(userfile):
         with open(userfile, "r+") as read_file:
             data = json.load(read_file)
