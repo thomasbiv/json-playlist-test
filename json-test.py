@@ -5,13 +5,13 @@ from os import path
 
 def main():
     print("------- Welcome to your JSON DB! -------\n")
-    print("Will you be:\n1. Creating a new playlist file for a new user\n2. Adding a song to an existing playlist for a user?\n3. Adding a new playlist to an existing user?\n4. Viewing an existing playlist?\n5. Viewing all of a user's playlists?\n6. Deleting a song from a playlist?\n7. Deleting an entire playlist for a user?\n8. Clear an entire playlist file for a user?\n(Enter 1, 2, 3, 4, 5, 6, 7, or 8)")
+    print("Will you be:\n1. Creating a new playlist file for a new user\n2. Adding a song to an existing playlist for a user?\n3. Adding a new playlist to an existing user?\n4. Viewing an existing playlist?\n5. Viewing all of a user's playlists?\n6. Deleting a song from a playlist?\n7. Deleting an entire playlist for a user?\n8. Clear an entire playlist file for a user?\n9. Listing all playlist files?\n(Enter 1, 2, 3, 4, 5, 6, 7, 8, or 9)")
     sel = input()
     print(type(sel))
 
-    while (len(sel) != 1 or int(sel) > 8 or int(sel) < 1):
+    while (len(sel) != 1 or int(sel) > 9 or int(sel) < 1):
         print("\nInvalid entry")
-        print("Will you be:\n1. Creating a new playlist file for a new user\n2. Adding a song to an existing playlist for a user?\n3. Adding a new playlist to an existing user?\n4. Viewing an existing playlist?\n5. Viewing all of a user's playlists?\n6. Deleting a song from a playlist?\n7. Deleting an entire playlist for a user?\n8. Clear an entire playlist file for a user?\n(Enter 1, 2, 3, 4, 5, 6, 7, or 8)")
+        print("Will you be:\n1. Creating a new playlist file for a new user\n2. Adding a song to an existing playlist for a user?\n3. Adding a new playlist to an existing user?\n4. Viewing an existing playlist?\n5. Viewing all of a user's playlists?\n6. Deleting a song from a playlist?\n7. Deleting an entire playlist for a user?\n8. Clear an entire playlist file for a user?\n9. Listing all playlist files?\n(Enter 1, 2, 3, 4, 5, 6, 7, 8, or 9)")
         sel = input()
 
     if int(sel) == 1:
@@ -64,6 +64,8 @@ def main():
         print("\nWhat is the user's name?")
         username = input()
         json_clear_playlists(username)
+    else:
+        json_list_files()
 
 
 
@@ -210,7 +212,19 @@ def json_clear_playlists(username):
                 print("The requested playlist does not exist.")
     else:
         print("This playlist file does not exist. Create a new file first.")
-    
+
+
+def json_list_files():
+    try:    
+        print("\n--- Playlist Files ---")
+        file_list = os.listdir("./playlists")
+        if len(file_list) == 0:
+            print("There are no playlist files.")
+        else:
+            for file in file_list:
+                print(file)
+    except:
+        print("Files could not be accessed.")
 
 if __name__ == "__main__":
     main()
