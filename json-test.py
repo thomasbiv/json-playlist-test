@@ -19,9 +19,7 @@ def main():
         username = input()
         print("What is the playlist's name?")
         playlistname = input()
-        print("What is the first song and artist you would like to add to the playlist?")
-        firstsongartist = input()
-        json_create(username, playlistname, firstsongartist)
+        json_create(username, playlistname)
     elif int(sel) == 2:
         print("\nWhat is the user's name?")
         username = input()
@@ -35,9 +33,7 @@ def main():
         username = input()
         print("What is the playlist's name?")
         playlistname = input()
-        print("What is the song and artist you would like to add to the playlist?")
-        songnameartist = input()
-        json_add_new_playlist(username, playlistname, songnameartist)
+        json_add_new_playlist(username, playlistname)
     elif int(sel) == 4:
         print("\nWhat is the user's name?")
         username = input()
@@ -69,10 +65,11 @@ def main():
 
 
 
-def json_create(username, playlistname, firstsongartist):
+
+def json_create(username, playlistname):
         userfile = "./playlists/"  + username + ".json"
         if not path.exists(userfile):
-            data_begin = {"Playlists" : {playlistname: [firstsongartist]}}
+            data_begin = {"Playlists" : {playlistname: []}}
             with open(userfile, "w") as write_file:
                 json.dump(data_begin, write_file)
                 print("Playlist file created for " + str(username) + " containing one playlist named " + str(playlistname) + "! ")
@@ -103,10 +100,10 @@ def json_add_to_playlist(username, playlistname, songnameartist):
                     print("Command aborted. Please try again.")
     else:
         print("This playlist file does not exist. Creating a new file.")
-        json_create(username, playlistname, songnameartist)
+        json_create(username, playlistname)
 
 
-def json_add_new_playlist(username, playlistname, songnameartist):
+def json_add_new_playlist(username, playlistname):
     userfile = "./playlists/"  + username + ".json"
     if path.exists(userfile):
         with open(userfile, "r+") as read_file:
@@ -114,13 +111,13 @@ def json_add_new_playlist(username, playlistname, songnameartist):
             if playlistname in data["Playlists"]:
                 print("Playlist with this name already exists.")
             else:
-                data["Playlists"].update({playlistname: [songnameartist]})
+                data["Playlists"].update({playlistname: []})
                 read_file.seek(0)
                 json.dump(data, read_file)
                 print("Playlist named " + str(playlistname) + " created for " + str(username) + "!")
     else:
         print("This playlist file does not exist. Creating a new file.")
-        json_create(username, playlistname, songnameartist)
+        json_create(username, playlistname)
 
 
 def json_view_playlist(username, playlistname):
@@ -225,6 +222,7 @@ def json_list_files():
                 print(file)
     except:
         print("Files could not be accessed.")
+
 
 if __name__ == "__main__":
     main()
